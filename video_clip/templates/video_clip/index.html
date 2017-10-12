@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Video Clip</title>
+    <style type="text/css">
+        nav.sidebar {
+            background-color: #f9f9f9;
+            width:30%;
+            height:100%;
+
+        }
+        content.container {
+            border:1px solid pink;
+            float:left;
+
+        }
+
+    </style>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
+
+</head>
+<body>
+    <nav class="sidebar">
+        <h1>Video Clip</h1>
+        {% for category in categories %}
+        <div>
+            {% if category.parent.name is not null %}
+                <p>{{ category.parent.name }} > {{ category.name }}</p>
+            {% else %}
+                <p>{{ category.name }}</p>
+            {% endif %}
+        </div>
+    </nav>
+    {% endfor %}
+
+    <content class="container">
+        {% for clip in clips %}
+        <div>
+            <p>{{ clip.title }}</p>
+            <iframe width="560" height="315" src="{{ clip.video_url }}" frameborder="0" allowfullscreen></iframe>
+            <p>{{ clip.memo }}</p> 
+            <p><sub>{{clip.category.name}} - {{ clip.created_at}}</sub></p>
+        </div>
+        {% endfor %}
+    </content>
+</body>
+</html>
