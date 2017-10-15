@@ -1,4 +1,5 @@
 from django.db import models
+from django.core.urlresolvers import reverse
 
 class Category(models.Model):
     parent = models.ForeignKey('self', default=None, null=True, blank=True, related_name='nested_category')
@@ -17,5 +18,9 @@ class Clip(models.Model):
     # on_delete는 category가 삭제되었을 때 하위 post들을 어떻게 할 지에 대한 내용인듯..?
     category = models.ForeignKey(Category, on_delete = models.CASCADE)
 
+    def get_absolute_url(self):
+        return reverse("detail", args=[self.pk])
 
+    def __str__(self):
+        return self.title
 

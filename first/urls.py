@@ -19,5 +19,10 @@ from video_clip import views
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
-    url(r'^$', views.index, name='index')
+    url(r'^$', views.index, name='index'),
+    url(r'^new/$', views.new, name='new'),
+    url(r'^/(?P<pk>[0-9]+)/detail/$', views.detail, name='detail'),
+    url(r'^/(?P<pk>[0-9]+)/edit/$', views.edit, name='edit'),
+    url(r'^/(?P<pk>[0-9]+)/delete/$', views.delete, name='delete'),
+    url(r'^/(?P<name>[ㄱ-힣]+)/$', views.category, name="category"),
 ]
