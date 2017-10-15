@@ -64,9 +64,9 @@ body {
         {% for category in categories %}
         <div>
             {% if category.parent.name is not null %}
-                <p><a href="{% url "category" name=category.parent.name %}">{{ category.parent.name }}</a> > <a href="{% url "category" name=category.name %}">{{ category.name }}</a></p>
+                <p><a href="{% url "category" name=category.parent.name %}">{{ category.parent.name }}</a> > <a href="{% url "category" name=category.name %}">{{ category.name }} ({{ category.clip_set.count }})</a></p>
             {% else %}
-                <p><a href="{% url "category" name=category.name %}">{{ category.name }}</a></p>
+                <p><a href="{% url "category" name=category.name %}">{{ category.name }} ({{ category.clip_set.count }})</a></p>
             {% endif %}
         </div>
         {% endfor %}
