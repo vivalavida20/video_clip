@@ -1,27 +1,66 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Video Clip</title>
-    <style type="text/css">
-        nav.sidebar {
-            background-color: #f9f9f9;
-            width:30%;
-            height:100%;
+<title>Video Clip</title>
+<style>
+body {
+    font-family: "Lato", sans-serif;
+    font-size: 1rem;
+    color: #818181;
+}
 
-        }
-        content.container {
-            border:1px solid pink;
-            float:left;
+.sidenav {
+    height: 100%;
+    width: 200px;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    background-color: #111;
+    overflow-x: hidden;
+    padding-top: 20px;
+    padding-left:20px;
+}
 
-        }
+.sidenav a {
+    /*padding: 6px 6px 6px 32px;*/
+    text-decoration: none;
+    font-size: 1rem;
+    color: #818181;
+    /*display: block;*/
+}
 
-    </style>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
+.sidenav a:hover {
+    color: #f1f1f1;
+}
+.sidenav h1 {
+    /*padding: 6px 6px 6px 32px;*/
+    text-decoration: none;
+    font-size: 1.5rem;
+    color: #f1f1f1;
+    display: block;
+    margin-bottom:30px;
+}
 
+.main {
+    margin-left: 210px; /* Same as the width of the sidenav */
+    margin-top:30px;
+}
+
+.main h1 {
+    font-size:1.7em;
+}
+
+@media screen and (max-height: 450px) {
+  .sidenav {padding-top: 15px;}
+  .sidenav a {font-size: 18px;}
+}
+</style>
 </head>
 <body>
-    <nav class="sidebar">
-        <h1>Video Clip</h1>
+
+    <div class="sidenav">
+      <h1>Video Clip</h1>
         {% for category in categories %}
         <div>
             {% if category.parent.name is not null %}
@@ -30,18 +69,21 @@
                 <p><a href="{% url "category" name=category.name %}">{{ category.name }}</a></p>
             {% endif %}
         </div>
-    </nav>
-    {% endfor %}
-
-    <content class="container">
-        {% for clip in clips %}
-        <div>
-            <p><a href="{% url "detail" pk=clip.pk %}">{{ clip.title }}</a></p>
-            <iframe width="560" height="315" src="{{ clip.video_url }}" frameborder="0" allowfullscreen></iframe>
-            <p>{{ clip.memo }}</p> 
-            <p><sub>{{clip.category.name}} - {{ clip.created_at}}</sub></p>
-        </div>
         {% endfor %}
-    </content>
+        <a href="{% url "new" %}" class="new_clip">+ 새 클립 만들기</a>
+    </div>
+
+    <div class="main">
+        <ul class="container">
+            {% for clip in clips %}
+            <li>
+                <h1><a href="{% url "detail" pk=clip.pk %}">{{ clip.title }}</a></h1>
+                <p><sub>{{clip.category.name}} - {{ clip.created_at}}</sub></p>
+                <iframe width="560" height="315" src="{{ clip.video_url }}" frameborder="0" allowfullscreen></iframe>
+            </li>
+            {% endfor %}
+        </ul>
+    </div>
+         
 </body>
-</html>
+</html> 

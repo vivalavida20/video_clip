@@ -12,8 +12,7 @@ def new(request):
     if request.method == "POST":
         form = ClipForm(request.POST)
         if form.is_valid():
-            clip = form.save(commit=False)
-            clip.generate()
+            clip = form.save()
             return redirect("index")
     else:
         form = ClipForm()
