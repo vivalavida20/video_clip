@@ -20,26 +20,17 @@
 
 </head>
 <body>
-    <nav class="sidebar">
-        <h1>Video Clip</h1>
-        {% for category in categories %}
-        <div>
-            {% if category.parent.name is not null %}
-                <p><a href="{% url "category" name=category.parent.name %}">{{ category.parent.name }}</a> > <a href="{% url "category" name=category.name %}">{{ category.name }}</a></p>
-            {% else %}
-                <p><a href="{% url "category" name=category.name %}">{{ category.name }}</a></p>
-            {% endif %}
-        </div>
-    </nav>
-    {% endfor %}
-
+    <div>
+        <h1>{{ category.name }}</h1>
+        <p>관련 클립 수 : {{ category.clip_set.count }}</p>
+    </div>
     <content class="container">
         {% for clip in clips %}
         <div>
             <p><a href="{% url "detail" pk=clip.pk %}">{{ clip.title }}</a></p>
             <iframe width="560" height="315" src="{{ clip.video_url }}" frameborder="0" allowfullscreen></iframe>
             <p>{{ clip.memo }}</p> 
-            <p><sub>{{clip.category.name}} - {{ clip.created_at}}</sub></p>
+            <p><sub>{{ clip.created_at}}</sub></p>
         </div>
         {% endfor %}
     </content>
