@@ -1,9 +1,6 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Video Clip</title>
-</head>
-<body>
+{% extends "video_clip/layout.html" %}
+
+{% block content %}
     <h1>{{ clip.title }}</h1>
     <iframe width="560" height="315" src="{{ clip.video_url }}" frameborder="0" allowfullscreen></iframe>
     <p>{{ clip.memo | linebreaksbr }}</p> 
@@ -11,5 +8,4 @@
     <a href="/">돌아가기</a>
     <a href="{% url "edit" pk=clip.pk %}">수정하기</a>
     <a href="{% url "delete" pk=clip.pk %}">글 삭제하기</a>
-</body>
-</html>
+{% endblock %}

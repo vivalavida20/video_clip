@@ -1,0 +1,82 @@
+ <!DOCTYPE html>
+<html>
+<head>
+<title>Video Clip</title>
+<style>
+body {
+    font-family: "Lato", sans-serif;
+    font-size: 1rem;
+    color: #818181;
+}
+
+.sidenav {
+    height: 100%;
+    width: 200px;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    background-color: #111;
+    overflow-x: hidden;
+    padding-top: 20px;
+    padding-left:20px;
+}
+
+.sidenav a {
+    /*padding: 6px 6px 6px 32px;*/
+    text-decoration: none;
+    font-size: 1rem;
+    color: #818181;
+    /*display: block;*/
+}
+
+.sidenav a:hover {
+    color: #f1f1f1;
+}
+.sidenav h1 {
+    /*padding: 6px 6px 6px 32px;*/
+    text-decoration: none;
+    font-size: 1.5rem;
+    color: #f1f1f1;
+    display: block;
+    margin-bottom:30px;
+}
+
+.main {
+    margin-left: 230px; /* Same as the width of the sidenav */
+    margin-top:30px;
+}
+
+.main h1 {
+    font-size:1.7em;
+}
+
+@media screen and (max-height: 450px) {
+  .sidenav {padding-top: 15px;}
+  .sidenav a {font-size: 18px;}
+}
+</style>
+</head>
+<body>
+
+    <div class="sidenav">
+      <a href="/"><h1>Video Clip</h1></a>
+        {% for category in categories %}
+        <div>
+            {% if category.parent.name is not null %}
+                <p><a href="{% url "category" name=category.parent.name %}">{{ category.parent.name }}</a> > <a href="{% url "category" name=category.name %}">{{ category.name }} ({{ category.clip_set.count }})</a></p>
+            {% else %}
+                <p><a href="{% url "category" name=category.name %}">{{ category.name }} ({{ category.clip_set.count }})</a></p>
+            {% endif %}
+        </div>
+        {% endfor %}
+        <a href="{% url "new" %}" class="new_clip">+ 새 클립 만들기</a>
+    </div>
+
+    <div class="main">
+        {% block content %}
+        {% endblock %}
+    </div>
+         
+</body>
+</html> 
