@@ -10,7 +10,6 @@
         <div>
             <h1><a href="{% url "detail" pk=clip.pk %}">{{ clip.title }}</a></h1>
             <iframe width="560" height="315" src="{{ clip.video_url }}" frameborder="0" allowfullscreen></iframe>
-            <p>{{ clip.memo }}</p> 
             <p><sub>{{ clip.created_at}}</sub></p>
         </div>
         {% endfor %}

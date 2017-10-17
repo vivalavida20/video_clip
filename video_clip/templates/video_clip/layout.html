@@ -63,11 +63,16 @@ body {
       <a href="/"><h1>Video Clip</h1></a>
         {% for category in categories %}
         <div>
-            {% if category.parent.name is not null %}
-                <p><a href="{% url "category" name=category.parent.name %}">{{ category.parent.name }}</a> > <a href="{% url "category" name=category.name %}">{{ category.name }} ({{ category.clip_set.count }})</a></p>
+            {% if category.children is not null %}
+            <p><a href="{% url "category" name=category.name %}">{{ category.name }}</a></p>
+                
+                <p><a href="{% url "category" name=category.children.name %}">&nbsp;&nbsp;- {{ category.children.name }}</a></p>
+               
             {% else %}
-                <p><a href="{% url "category" name=category.name %}">{{ category.name }} ({{ category.clip_set.count }})</a></p>
+             <p><a href="{% url "category" name=category.name %}">{{ category.name }}</a></p>
             {% endif %}
+
+           
         </div>
         {% endfor %}
         <a href="{% url "new" %}" class="new_clip">+ 새 클립 만들기</a>
