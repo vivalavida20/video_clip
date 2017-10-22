@@ -8,7 +8,15 @@ body {
     font-size: 1rem;
     color: #818181;
 }
-
+li {
+    list-style-type: none;
+}
+ul {padding-left:0;}
+a {text-decoration: none;}
+input {width:400px; padding:6px;border:1px solid #d2d2d2;font-size:1rem;}
+textarea {width:400px;padding:6px;resize:none;border:1px solid #d2d2d2;font-size:1rem;}
+select {width:400px;padding:6px;resize:none;border:1px solid #d2d2d2;font-size:1rem;}
+button {font-size:1rem;}
 .sidenav {
     height: 100%;
     width: 200px;
@@ -48,14 +56,43 @@ body {
 }
 
 .main h1 {
-    font-size:1.7em;
+    font-size:1.5em;
+}
+.main a {
+    color:#666;
+}
+.main a:hover {
+    color:#333;
 }
 
 @media screen and (max-height: 450px) {
   .sidenav {padding-top: 15px;}
   .sidenav a {font-size: 18px;}
 }
+
+.category_detail h1 {
+    display: inline-block;
+}
+.container {
+    display:block;
+    margin-top:30px;
+    margin-bottom:30px;
+    width:1000px;
+}
+.detail_buttons {
+    text-align:right;
+    margin-bottom:10px;
+}
+.new {
+    position: absolute;
+    bottom:30px;
+    margin-bottom:20px;
+}
+.new a {
+    line-height: 1.8rem;
+}
 </style>
+
 </head>
 <body>
 
@@ -64,16 +101,19 @@ body {
         {% for category in categories %}
         <div>
             {% if category.parent is null %}
-                <p><a href="{% url "category" name=category.name %}">{{ category.name }}</a></p>
+                <p><a href="{% url "category" name=category.name %}">{{ category.name }} ({{ category.clip_set.count }})</a></p>
                 {% for child in category.children.all %}    
-                <p><a href="{% url "category" name=child.name %}">&nbsp;&nbsp;- {{ child.name }}</a></p>
+                <p><a href="{% url "category" name=child.name %}">&nbsp;&nbsp;- {{ child.name }} ({{ child.clip_set.count}})</a></p>
                 {% endfor %}
             {% else %}
             
             {% endif %}
         </div>
         {% endfor %}
-        <a href="{% url "new" %}" class="new_clip">+ 새 클립 만들기</a>
+        <div class="new">
+        <a href="{% url "new" %}" class="new_clip">+ 새 클립 추가하기</a><br>
+        <a href="{% url "new_category" %}" class="new_clip">+ 새 카테고리 만들기</a>
+        </div>
     </div>
 
     <div class="main">

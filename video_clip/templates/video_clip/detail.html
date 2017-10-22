@@ -1,11 +1,16 @@
 {% extends "video_clip/layout.html" %}
 
 {% block content %}
-    <h1>{{ clip.title }}</h1>
-    <iframe width="560" height="315" src="{{ clip.video_url }}" frameborder="0" allowfullscreen></iframe>
-    <p>{{ clip.memo | linebreaks }}</p> 
-    <p><sub>{{clip.category.name}} - {{ clip.created_at}}</sub></p>
-    <a href="/">돌아가기</a>
-    <a href="{% url "edit" pk=clip.pk %}">수정하기</a>
-    <a href="{% url "delete" pk=clip.pk %}">글 삭제하기</a>
+    <div class="container">
+        <h1>{{ clip.title }}</h1> 
+        <hr>
+        <div class="detail_buttons">
+            <a href="/">메인으로 돌아가기</a> | 
+            <a href="{% url "edit" pk=clip.pk %}">수정하기</a> | 
+            <a href="{% url "delete" pk=clip.pk %}">글 삭제하기</a> 
+        </div>
+        <iframe width="1000" height="580" src="{{ clip.video_url }}" frameborder="0" allowfullscreen></iframe>
+        <p>{{ clip.memo | linebreaks }}</p> 
+        <p><sub>{{clip.category.name}} - {{ clip.created_at}}</sub></p>
+    </div>
 {% endblock %}

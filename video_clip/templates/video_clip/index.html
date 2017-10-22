@@ -1,13 +1,14 @@
 {% extends "video_clip/layout.html" %}
 
 {% block content %}
-<ul class="container">
+<ul class="">
     {% for clip in clips %}
-    <li>
+    <li class="container">
         <h1><a href="{% url "detail" pk=clip.pk %}">{{ clip.title }}</a></h1>
         <p><sub>{{clip.category.name}} - {{ clip.created_at}}</sub></p>
-        <iframe width="560" height="315" src="{{ clip.video_url }}" frameborder="0" allowfullscreen></iframe>
+        <iframe width="1000" height="580" src="{{ clip.video_url }}" frameborder="0" allowfullscreen></iframe>
     </li>
+    <hr>
     {% endfor %}
 </ul>
 {% endblock %}

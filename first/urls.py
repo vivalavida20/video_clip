@@ -25,4 +25,5 @@ urlpatterns = [
     url(r'^/(?P<pk>[0-9]+)/edit/$', views.edit, name='edit'),
     url(r'^/(?P<pk>[0-9]+)/delete/$', views.delete, name='delete'),
     url(r'^/(?P<name>[ㄱ-힣]+)/$', views.category, name="category"),
+    url(r'^new_category/$', views.new_category, name='new_category'),
 ]

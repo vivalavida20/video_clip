@@ -1,14 +1,15 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from .models import Category, Clip
-from .form import ClipForm
+from .form import ClipForm, CategoryForm
 
 def send_categories():
     categories = Category.objects.all()
 
     return categories
 
+
 def index(request):
-    clips = Clip.objects.all()
+    clips = Clip.objects.order_by('-created_at')
 
     return render(request, "video_clip/index.html", {"categories":send_categories(), "clips":clips})
 
@@ -47,7 +48,17 @@ def delete(request, pk):
 
 def category(request, name):
     category = Category.objects.get(name=name)
-    clips = Clip.objects.filter(category=category)
+    clips = Clip.objects.filter(category=category).order_by('-created_at')
 
     return render(request, 'video_clip/category_detail.html', {'clips':clips, 'category':category, "categories":send_categories()})
+
+def new_category(request):
+    if request.method == "POST":
+        form = CategoryForm(request.POST)
+        if form.is_valid():
+            category = form.save()
+            return redirect("index")
+    else:
+        form = CategoryForm()
+    return render(request, "video_clip/category_form.html", {"categories":send_categories(), "form":form})
 

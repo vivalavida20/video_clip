@@ -4,7 +4,19 @@
     <div>
         <form method="POST">
             {% csrf_token %}
-            {{ form.as_p }}
+            <!-- {{ form.as_p }} -->
+            <h3>제목</h3>
+            <div>{{ form.title }}</div>
+
+            <h3>비디오 url</h3>
+            <div>{{ form.video_url }}</div>
+
+            <h3>메모</h3>
+            <div>{{ form.memo }}</div>
+
+            <h3>카테고리</h3>
+            <div>{{ form.category }}</div>
+            <p></p>
             <button type="submit">save</button>
         </form>
     </div>

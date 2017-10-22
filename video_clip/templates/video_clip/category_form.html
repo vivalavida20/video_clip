@@ -1,0 +1,20 @@
+{% extends "video_clip/layout.html" %}
+
+{% block content %}
+    <div>
+        <form method="POST">
+            {% csrf_token %}
+            <!-- {{ form.as_p }} -->
+            <h3>카테고리 이름</h3>
+            <div>{{ form.name }}</div>
+
+            <h3>SLUG</h3>
+            <div>{{ form.slug }}</div>
+
+            <h3>상위 카테고리</h3>
+            <div>{{ form.parent }}</div>
+            <p></p>
+            <button type="submit">save</button>
+        </form>
+    </div>
+{% endblock %}

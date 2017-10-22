@@ -1,16 +1,16 @@
 {% extends "video_clip/layout.html" %}
 
 {% block content %}
-    <div>
-        <h1>{{ category.name }}</h1>
-        <p>관련 클립 수 : {{ category.clip_set.count }}</p>
+    <div class="category_detail">
+        <h1>{{ category.name }}</h1><sub> &nbsp;&nbsp;&nbsp; | 관련 클립 수 : {{ category.clip_set.count }}</sub>
+        <hr>
     </div>
     <content class="container">
         {% for clip in clips %}
         <div>
             <h1><a href="{% url "detail" pk=clip.pk %}">{{ clip.title }}</a></h1>
-            <iframe width="560" height="315" src="{{ clip.video_url }}" frameborder="0" allowfullscreen></iframe>
             <p><sub>{{ clip.created_at}}</sub></p>
+            <iframe width="1000" height="580" src="{{ clip.video_url }}" frameborder="0" allowfullscreen></iframe>
         </div>
         {% endfor %}
     </content>
