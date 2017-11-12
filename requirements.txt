@@ -1,1 +1,2 @@
 -r reqs/prod.txt
+django=<1.11
